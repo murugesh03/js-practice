@@ -394,7 +394,7 @@ Object
 
 fetch("https://freetestapi.com/api/v1/books")
   .then((res) => {
-    console.log(res);
+    console.log(res, "ras");
     if (res.status === 404) {
       throw new Error("failed to fetch data");
     }
