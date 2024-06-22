@@ -392,29 +392,165 @@ Object
 
 // getStudentName();
 
-fetch("https://freetestapi.com/api/v1/books")
-  .then((res) => {
-    console.log(res, "ras");
-    if (res.status === 404) {
-      throw new Error("failed to fetch data");
-    }
-    return res.json();
-  })
-  .then((res) => {
-    console.log(res, "this is second rs");
+// fetch("https://freetestapi.com/api/v1/books")
+//   .then((res) => {
+//     console.log(res, "ras");
+//     if (res.status === 404) {
+//       throw new Error("failed to fetch data");
+//     }
+//     return res.json();
+//   })
+//   .then((res) => {
+//     console.log(res, "this is second rs");
 
-    fetch(`https://freetestapi.com/api/v1/books/${res[0].id}`)
-      .then((firstBook) => {
-        console.log(firstBook, "this is first fook");
-        return firstBook.json();
-      })
-      .then((firstBookRes) =>
-        console.log(firstBookRes, "this is first book res")
-      );
-    return res[0];
-  })
-  .then((res) => {
-    console.log(res, "this is third rs");
-  })
-  .catch((error) => console.log(error, "this is eror"));
-// ---------------------------
+//     fetch(`https://freetestapi.com/api/v1/books/${res[0].id}`)
+//       .then((firstBook) => {
+//         console.log(firstBook, "this is first fook");
+//         return firstBook.json();
+//       })
+//       .then((firstBookRes) =>
+//         console.log(firstBookRes, "this is first book res")
+//       );
+//     return res[0];
+//   })
+//   .then((res) => {
+//     console.log(res, "this is third rs");
+//   })
+//   .catch((error) => console.log(error, "this is eror"));
+// // ---------------------------
+
+//Using function keyword
+// async function getBooks() {
+//   try {
+//     const res = await fetch("https://freetestapi.com/api/v1/books");
+//     if (res.status === 404) {
+//       throw new Error("failed to fetch data");
+//     }
+//     const resJson = await res.json();
+//     console.log(resJson);
+//   } catch (error) {
+//     console.log(error, "error");
+//   }
+// }
+
+//Using arrow function
+
+// const getBooks = async () => {
+//   try {
+//     const res = await fetch("https://freetestapi.com/api/v1/books");
+//     if (res.status === 404) {
+//       throw new Error("failed to fetch data");
+//     }
+//     const resJson = await res.json();
+//     console.log(resJson);
+//   } catch (error) {
+//     console.log(error, "error");
+//   }
+// };
+
+// getBooks();
+
+//Promise.any
+// const promise1 = Promise.reject("Error");
+// const promise2 = Promise.resolve("Success");
+// const promise3 = Promise.reject("Another error");
+
+// Promise.any([promise1, promise2, promise3])
+//   .then((value) => {
+//     console.log(value); // 'Success'
+//   })
+//   .catch((error) => {
+//     console.error(error); // AggregateError if all promises fail
+//   });
+
+//Promise.allSettled
+
+// const promise1 = Promise.reject("Error");
+// const promise2 = Promise.resolve("Success");
+// const promise3 = Promise.reject("Another error");
+
+// Promise.any([promise1, promise2, promise3])
+//   .then((value) => {
+//     console.log(value); // 'Success'
+//   })
+//   .catch((error) => {
+//     console.error(error); // AggregateError if all promises fail
+//   });
+
+//Promise.race
+
+// const promise1 = new Promise((resolve) => setTimeout(resolve, 500, "one"));
+// const promise2 = new Promise((resolve) => setTimeout(resolve, 100, "two"));
+
+// Promise.race([promise1, promise2]).then((value) => {
+//   console.log(value); // 'two' (the faster promise)
+// });
+
+//promise.all
+
+// const promise1 = Promise.resolve(1);
+// const promise2 = Promise.resolve(2);
+// const promise3 = Promise.resolve(3);
+
+// Promise.all([promise1, promise2, promise3]).then((values) => {
+//   console.log(values); // [1, 2, 3]
+// });
+
+//Promise.reject
+// const rejectedPromise = Promise.reject("Already failed");
+
+//Promise.resolve
+// const resolvedPromise = Promise.resolve("Already done");
+
+//Call method
+
+const student = {
+  firstName: "sachin",
+  lastName: "Babu kumar",
+  getName: function () {
+    return `${this.firstName} ${this.lastName}`;
+  }
+};
+
+const student2 = {
+  firstName: "Kumar",
+  lastName: "Sam"
+};
+
+console.log(student.getName.call(student2));
+
+console.log(student.getName());
+
+//Apply method
+
+// const person1 = {
+//   name: "Pedro",
+//   surname: "Sanchez",
+//   sayName: function (city, country) {
+//     return this.name + " " + this.surname + ", " + city + ", " + country;
+//   }
+// };
+
+// const person2 = {
+//   name: "Jimena",
+//   surname: "Juarez"
+// };
+
+// console.log(person1.sayName.apply(person2, ["DF", "Mexico"]));
+
+const person1 = {
+  name: "Pedro",
+  surname: "Sanchez",
+  sayName: function () {
+    return this.name + " " + this.surname;
+  }
+};
+
+const person2 = {
+  name: "Jimena",
+  surname: "Juarez"
+};
+
+const sayPerson2Name = person1.sayName.bind(person2);
+console.log(person1.sayName());
+console.log(sayPerson2Name());
